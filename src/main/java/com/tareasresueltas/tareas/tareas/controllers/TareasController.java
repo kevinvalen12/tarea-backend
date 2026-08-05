@@ -20,7 +20,7 @@ public class TareasController {
     @GetMapping()
     public String listTarea() {
         this.tareasService.tareas();
-        return "";
+        return "Hola a todo";
     }
     
 }
