@@ -1,5 +1,6 @@
 package com.tareasresueltas.auth.jwt;
 
+<<<<<<< HEAD
 //asa la petición al siguiente filtro
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -81,4 +82,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+=======
+public class JwtAuthFilter {
+
+>>>>>>> f3207bebf6807f491a851efb68451f5b1ecbd1f3
 }
