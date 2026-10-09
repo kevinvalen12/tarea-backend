@@ -1,7 +1,6 @@
 package com.tareasresueltas.shared.config;
 
 import com.tareasresueltas.auth.jwt.JwtAuthFilter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 // sirve para configurar la seguridad HTTP
@@ -9,27 +8,22 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 // implementación del encoder de contraseñas con BCrypt
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 // configurar los cors
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.io.ObjectInputFilter.Config;
 import java.util.List;
 
 @Configuration
+@RequiredArgsConstructor 
 public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
-
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
-        this.jwtAuthFilter = jwtAuthFilter;
-    }
 
     // devuelve la cadena de filtros de seguridad. Spring Security la usará automáticamente.
     @Bean
@@ -45,7 +39,7 @@ public class SecurityConfig {
                 //regla de acceso
                 //publica register y login
                 // las demas necesitan autenticacione
-                .requestMatchers("api/auth/**").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated()
             )
             // no crear sesiones HTTP cada request es independiente; la "sesión" la lleva el JWT. 
@@ -68,10 +62,10 @@ public class SecurityConfig {
         config.setAllowedOrigins(List.of("http://localhost:4200", "http://localhost:4201"));
 
         // Métodos HTTP permitidos
-        config.setAllowedOrigins(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
         //Cualquier header (incluye Authorization)
-        config.setAllowedOrigins(List.of("*"));
+        config.setAllowedHeaders(List.of("*"));
 
         // Permite enviar cookies
         config.setAllowCredentials(true);
