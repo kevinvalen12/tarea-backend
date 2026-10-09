@@ -14,15 +14,17 @@ public class RegisterRequest {
 
     @NotBlank(message = "The first name is mandatory")
     private String firstName;
+    private String secondFirstName;
 
     @NotBlank(message = "The first surname is mandatory")
     private String lastName;
+    private String secondLastName;
 
-    @NotBlank(message = "The user is required.")
+    @NotBlank(message = "The user is required")
     private String userName;
 
     @NotBlank(message = "The password is required")
-    @Size(min = 5, message = "Minimum of 6 characters")
+    @Size(min = 5, message = "Minimum of 5 characters")
     private String password;
 
 

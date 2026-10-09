@@ -1,4 +1,4 @@
-package com.tareasresueltas.tareas;
+package com.tareasresueltas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

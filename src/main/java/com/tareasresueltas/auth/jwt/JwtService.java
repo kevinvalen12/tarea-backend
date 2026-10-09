@@ -58,7 +58,7 @@ public class JwtService {
     Valeida dos cosa que el email dentro del token sea el espera y que token no haya expirado
     */
     public boolean isTokenvalid(String token, String email) {
-        final String tokenEmail = extractEmail(token);
+        String tokenEmail = extractEmail(token);
         return tokenEmail.equals(email) && !isTokenExpired(token);
     }
 

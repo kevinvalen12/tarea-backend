@@ -5,6 +5,7 @@ import com.tareasresueltas.auth.dto.LoginRequest;
 import com.tareasresueltas.auth.dto.RegisterRequest;
 import com.tareasresueltas.auth.jwt.JwtService;
 import com.tareasresueltas.shared.exception.ApiException;
+import lombok.RequiredArgsConstructor;
 import com.tareasresueltas.user.User;
 import com.tareasresueltas.user.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -12,19 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor 
 public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-
-    public AuthService(
-            UserRepository userRepository,
-            PasswordEncoder passwordEncoder,
-            JwtService jwtService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtService = jwtService;
-    }
 
     //
     public AuthResponse register(RegisterRequest request) {
@@ -50,7 +43,7 @@ public class AuthService {
         // registrarse
         String token = jwtService.generateToken(user.getEmail());
 
-        return new AuthResponse(token, "Invalid credentials");
+        return new AuthResponse(token, "User registered successfully");
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -63,6 +56,6 @@ public class AuthService {
         }
 
         String token = jwtService.generateToken(user.getEmail());
-        return new AuthResponse(token, "Invalid credentials");
+        return new AuthResponse(token, "Login successful");
     }
 }

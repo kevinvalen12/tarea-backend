@@ -33,7 +33,7 @@ public class User {
 
     private String role = "USER";
 
-    private boolean enable = true;
+    private boolean enabled = true;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 }

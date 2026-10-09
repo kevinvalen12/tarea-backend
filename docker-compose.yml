@@ -2,9 +2,9 @@ services:
   backend:
     build: .
     ports:
-      - "8080:8080"
+      - "8081:8081"
     environment:
-      SPRING_DATA_MONGODB_URI: ${URL_MONGO}
+      SPRING_MONGODB_URI: ${URL_MONGO}
       SPRING_MONGODB_DATABASE: ${DATABASE}
       APP_JWT_SECRET: ${APP_JWT_SECRET}
       JAVA_OPTS: "-Xmx384m -Xms128m"

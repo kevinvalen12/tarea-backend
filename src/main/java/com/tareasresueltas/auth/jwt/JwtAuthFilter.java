@@ -22,19 +22,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
-
-import jakarta.validation.constraints.NotNull;
-
 // se registra este filtro como un beat para que spring boot lo pueda utilizar
 @Component
 // hereda la logica "solo "ejecuta una vez por request"
+@RequiredArgsConstructor 
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
-
-    public JwtAuthFilter(JwtService jwtService) {
-        this.jwtService = jwtService;
-    }
 
     @Override
     protected void doFilterInternal(
@@ -43,7 +36,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws  ServletException, IOException {
         //Extrae el header Authorization de la petición.
-        final String authHeader = request.getHeader("Authorization");
+        String authHeader = request.getHeader("Authorization");
 
         //Si no hay token → dejamos pasar la petición sin autenticar y login decide si lo deja pasar o no
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {

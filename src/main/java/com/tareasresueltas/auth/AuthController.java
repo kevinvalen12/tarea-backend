@@ -3,23 +3,20 @@ package com.tareasresueltas.auth;
 import com.tareasresueltas.auth.dto.AuthResponse;
 import com.tareasresueltas.auth.dto.LoginRequest;
 import com.tareasresueltas.auth.dto.RegisterRequest;
-import com.tareasresueltas.user.UserRepository;
+import lombok.RequiredArgsConstructor;
 // activa las validaciones de anotaciones
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 // representa al usuario autenticado en el request actual. Spring la inyecta si la pides como parámetro 
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor 
 public class AuthController {
 
     private final AuthService authService;
 
-    public AuthController(AuthService authService, UserRepository userRepository) {
-        this.authService = authService;
-    }
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(
