@@ -34,5 +34,6 @@ out/
 /.nb-gradle/
 
 ### VS Code ###
-.vscode/
 .env
+.vscode/*
+!.vscode/launch.json
