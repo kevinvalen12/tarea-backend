@@ -1,4 +1,4 @@
-FROM amazoncorretto:21-alpine AS build
+FROM amazoncorretto:21.0.13-alpine AS build
 WORKDIR /app
 
 COPY gradlew .
@@ -9,10 +9,11 @@ RUN chmod +x gradlew && ./gradlew dependencies --no-daemon || true
 COPY src src
 RUN ./gradlew bootJar --no-daemon
 
-FROM amazoncorretto:21-alpine
+FROM amazoncorretto:21.0.13-alpine
 WORKDIR /app
 
-RUN addgroup -S spring && adduser -S spring -G spring
+RUN apk upgrade --no-cache \
+ && addgroup -S spring && adduser -S spring -G spring
 
 COPY --from=build /app/build/libs/*.jar app.jar
 
